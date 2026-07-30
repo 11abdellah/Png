@@ -121,14 +121,24 @@
     background:linear-gradient(135deg, var(--red), #8f1c22);
     padding:26px 70px; border-radius:20px; box-shadow:0 20px 50px rgba(193,39,45,.4);
   }
+
+  /* ============ SLIDE 4 — REEL BLANK TEMPLATE (9:16, empty) ============ */
+  .slide-reel{
+    width:1080px; height:1920px; padding:90px 90px;
+  }
+  .reel-hint{
+    position:absolute; top:50%; left:50%; transform:translate(-50%,-50%);
+    color:rgba(243,239,230,.18); font-size:26px; font-weight:700; text-align:center;
+    pointer-events:none;
+  }
 </style>
 </head>
 <body>
 
   <div class="howto">
     <h1>📸 تحميل التصاميم كصور PNG</h1>
-    <p>اضغط زر "⬇️ تحميل" تحت أي تصميم، وينزّل عندك مباشرة بحجم <b>1080×1350</b> بكسل بالضبط — بلا أي إعدادات يدوية.</p>
-    <button class="dl-all-btn" onclick="downloadAll()">⬇️ حمّل التصاميم الـ3 دفعة وحدة</button>
+    <p>اضغط زر "⬇️ تحميل" تحت أي تصميم، وينزّل عندك مباشرة بالحجم المناسب — <b>1080×1350</b> للمنشورات، و<b>1080×1920</b> لقالب الـ Reel — بلا أي إعدادات يدوية.</p>
+    <button class="dl-all-btn" onclick="downloadAll()">⬇️ حمّل التصاميم الـ4 دفعة وحدة</button>
     <p id="dl-status" style="margin-top:14px; color:var(--gold-soft); font-size:13px;"></p>
     <p style="margin-top:16px; font-size:12px; color:#999;">
       ⚠️ إذا المتصفح سألك "السماح بتحميلات متعددة"، اضغط "سماح/Allow" باش تنزّل كل الصور.
@@ -179,18 +189,26 @@
     <div class="cta-big">📩 تواصل معنا</div>
   </div>
 
+  <!-- ============ SLIDE 4 — قالب فارغ لـ Reel (1080×1920) ============ -->
+  <div class="slide-label">4 — قالب فارغ لـ Reel (فرغة، صمّم واكتب عليها براحتك)</div>
+  <button class="dl-btn" onclick="downloadSlide('s4','4-قالب-ريل.png', this)">⬇️ تحميل PNG</button>
+  <div class="slide slide-bg slide-reel" id="s4">
+    <div class="brandmark">متجر<span>ي</span></div>
+  </div>
+
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
   <script>
     const ALL_SLIDES = [
-      ['s1','1-الهوك.png'], ['s2','2-الحل.png'], ['s3','3-السعر.png']
+      ['s1','1-الهوك.png'], ['s2','2-الحل.png'], ['s3','3-السعر.png'], ['s4','4-قالب-ريل.png']
     ];
 
     async function renderSlide(id) {
       const el = document.getElementById(id);
       if (document.fonts && document.fonts.ready) await document.fonts.ready;
+      const isReel = el.classList.contains('slide-reel');
       return html2canvas(el, {
         width: 1080,
-        height: 1350,
+        height: isReel ? 1920 : 1350,
         scale: 1,
         backgroundColor: '#0F1C18',
         useCORS: true,
